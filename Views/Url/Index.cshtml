@@ -1,0 +1,14 @@
+@model ShortenModel
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="min-w-full min-h-screen flex items-center justify-center">
+    <div class="flex">
+        <form asp-controller="Url" asp-action="Shorten" method="POST">
+            <input class="bg-gray-200 rounded-l-lg text-2xl py-4 px-8 hover:bg-gray-300 active:bg-gray-300" asp-for="Url" type="text" placeholder="Enter your link here" autocomplete="off"/>
+            <button type="submit" class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-r-lg">Shorten</button>
+        </form>
+    </div>
+</div>
