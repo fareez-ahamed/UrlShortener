@@ -21,7 +21,11 @@ namespace UrlShortener.Controllers
         }
 
         [HttpPost("shorten")]
-        public ViewResult Shorten(ShortenModel model) {
+        public ViewResult Shorten(ShortenModel model)
+        {
+            if (!ModelState.IsValid)
+                return View("Index", model);
+            
             model.ShortenedUrl = _service.Shorten(model.Url);
             return View(model);
         }
