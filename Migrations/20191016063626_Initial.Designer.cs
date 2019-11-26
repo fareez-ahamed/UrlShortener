@@ -8,8 +8,8 @@ using UrlShortener.Data;
 namespace UrlShortener.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191015155637_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20191016063626_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

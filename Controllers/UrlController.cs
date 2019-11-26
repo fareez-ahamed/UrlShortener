@@ -26,8 +26,13 @@ namespace UrlShortener.Controllers
             if (!ModelState.IsValid)
                 return View("Index", model);
             
-            model.ShortenedUrl = _service.Shorten(model.Url);
+            model.ShortenedUrl = _service.ShortenAndStore(model.Url);
             return View(model);
+        }
+
+        public IActionResult RedirectUrl(string Hash)
+        {
+            return View();
         }
     }
 }

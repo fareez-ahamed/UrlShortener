@@ -18,5 +18,9 @@ namespace UrlShortener.Data
         {
             builder.UseMySql(_config.GetConnectionString("MySql"));
         }
+
+        protected override void OnModelCreating(ModelBuilder builder) {
+            builder.Entity<Url>().HasKey( x => x.Id );
+        }
     }
 }
