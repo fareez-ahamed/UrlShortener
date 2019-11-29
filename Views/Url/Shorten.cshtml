@@ -4,7 +4,15 @@
     Layout = "_Layout";
 }
 
-<div class="min-w-full min-h-screen flex items-center justify-center">
+<div class="h-12 flex items-stretch">
+    <div class="container mx-auto flex items-center"><p class="font-bold font-italic">UrlShortener</p></div>
+</div>
+
+<div class="container flex mx-auto justify-center p-8 mt-8">
+    <p class="text-4xl font-semibold">Here is your Shortened URL!</p>
+</div>
+
+<div class="flex container mx-auto justify-center mt-8">
     <div class="flex">
         <div class="bg-gray-200 rounded-l-lg text-2xl py-4 px-8 hover:bg-gray-300">@Model.ShortenedUrl</div>
         <button type="submit" class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-r-lg">Copy</button>
