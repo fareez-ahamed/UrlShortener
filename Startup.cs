@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UrlShortener.Data;
+using UrlShortener.Data.Repositories;
 using UrlShortener.Services;
 
 namespace UrlShortener
@@ -22,8 +23,10 @@ namespace UrlShortener
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>();
+            services.AddScoped<IUrlRepository, UrlRepository>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            services.AddScoped<IUrlHelper>(x => {
+            services.AddScoped<IUrlHelper>(x =>
+            {
                 var ctx = x.GetRequiredService<IActionContextAccessor>().ActionContext;
                 var factory = x.GetRequiredService<IUrlHelperFactory>();
                 return factory.GetUrlHelper(ctx);
@@ -47,7 +50,7 @@ namespace UrlShortener
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "u/{hash}",
-                    defaults: new { controller = "UrlController", action ="RedirectUrl" } );
+                    defaults: new { controller = "UrlController", action = "RedirectUrl" });
 
                 endpoints.MapControllerRoute(
                     name: "default",

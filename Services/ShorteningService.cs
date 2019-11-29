@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using UrlShortener.Data;
+using UrlShortener.Data.Repositories;
 
 namespace UrlShortener.Services
 {
@@ -17,15 +18,15 @@ namespace UrlShortener.Services
 
     public class ShorteningService : IShorteningService
     {
-        private readonly DataContext _db;
+        private readonly IUrlRepository _urlRepo;
         private readonly IUrlHelper _url;
         private readonly IConfiguration _config;
 
-        public ShorteningService(DataContext ctx, IUrlHelper url, IConfiguration config)
+        public ShorteningService(IUrlRepository urlRepo, IUrlHelper url, IConfiguration config)
         {
-            _db = ctx;
-            _url = url;
-            _config = config;
+            this._urlRepo = urlRepo;
+            this._url = url;
+            this._config = config;
         }
         private string Hash(string url)
         {
@@ -38,18 +39,13 @@ namespace UrlShortener.Services
 
         public string ShortenAndStore(string url)
         {
-            var urlModel = new Url()
-            {
-                OriginalUrl = url,
-                Hash = this.Hash(url)
-            };
-            _db.Urls.Add(urlModel);
-            _db.SaveChanges();
+            var hash = Hash(url);
+            this._urlRepo.addUrl(url, hash);
 
             // return _url.GetPathByName(HttpContext, )
             return _config.GetValue<string>("Application:BaseUrl") + _url.Action("RedirectUrl", "UrlController", new
             {
-                Hash = urlModel.Hash
+                Hash = hash
             });
         }
     }

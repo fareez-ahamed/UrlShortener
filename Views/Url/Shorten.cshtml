@@ -14,7 +14,7 @@
 
 <div class="flex container mx-auto justify-center mt-8">
     <div class="flex">
-        <div class="bg-gray-200 rounded-l-lg text-2xl py-4 px-8 hover:bg-gray-300">@Model.ShortenedUrl</div>
+        <a href=@Model.ShortenedUrl class="bg-gray-200 rounded-l-lg text-2xl py-4 px-8 hover:bg-gray-300">@Model.ShortenedUrl</a href="@Model.ShortenedUrl">
         <button type="submit" class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-r-lg">Copy</button>
     </div>
 </div>
